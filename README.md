@@ -38,7 +38,7 @@ node js/index.js 'rate(foo{bar="baz"}[5m])'
         }
       ],
       "offset": false,
-      "range": "Some(300s)"
+      "range": "300s"
     }
   ],
   "aggregation": false
