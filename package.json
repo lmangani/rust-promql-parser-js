@@ -1,0 +1,19 @@
+{
+  "name": "@qxip/promql-parser-js",
+  "version": "0.1.2",
+  "author": "Lorenzo Mangani <lorenzo.mangani@gmail.com>",
+  "scripts": {
+    "build": "npm run clean && wasm-pack build --target nodejs --release --scope qxip",
+    "clean": "rm -rf ./dist ./pkg ./target",
+    "test-rust": "cargo test -- --nocapture && wasm-pack test --node",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1",
+    "jest-cli": "^27.5.1",
+    "wasm-pack": "^0.10.2"
+  },
+  "dependencies": {
+    "jsonic": "^1.0.1"
+  }
+}
