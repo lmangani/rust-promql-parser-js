@@ -59,6 +59,7 @@ npm test
 -------
 
 ## TODO
+* [x] WASM binding + NODE module
 * [ ] Convert `Expr` to json w/o Debug print
 * [ ] Implement test cases
 * [ ] Document
