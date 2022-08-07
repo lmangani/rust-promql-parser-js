@@ -1,7 +1,7 @@
-# promql-parser-js
+# 🥇 promql-parser-js
 PromQL parsing wasm module based on Rust
 
-### 🥇 Install
+### Install
 ```bash
 npm install @qxip/promql-parser-js
 ```
@@ -9,10 +9,10 @@ npm install @qxip/promql-parser-js
 ### Functions
 - `promql_parse`
 
-### usage
+#### Usage
 ```javascript
-const { promql_parse } = require("../pkg/promql_parser_js.js");
-const jsonic = require('jsonic');
+const jsonic = require('jsonic'); // parse imperfect JSON we might return
+const { promql_parse } = require("promql-parser-js"); // parse PromQL to JSON
 const query = 'sum(rate(foo{bar="baz"}[5m])) by (x,y)';
 try {
   const s = promql_parse(query);
@@ -21,7 +21,7 @@ try {
 } catch(e) { console.log(e) }
 ```
 
-### 🏗️ Build
+### Build
 Rebuild wasm package release. Not needed for regular module usage.
 ```bash
 npm install
