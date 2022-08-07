@@ -42,7 +42,8 @@ node js/index.js 'rate(foo{bar="baz"}[5m])'
     }
   ],
   "aggregation": false
-}```
+}
+```
 
 ### Build
 Rebuild wasm package release. Not needed for regular module usage.
