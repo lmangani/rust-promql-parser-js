@@ -1,4 +1,4 @@
-# 🥇 promql-parser-js
+# ⚙️ promql-parser-js
 PromQL parsing wasm module based on Rust crate [promql-rs](https://github.com/detailyang/promql-rs)
 
 #### Status
