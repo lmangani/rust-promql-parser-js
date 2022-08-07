@@ -1,5 +1,8 @@
 # 🥇 promql-parser-js
-PromQL parsing wasm module based on Rust
+PromQL parsing wasm module based on Rust crate [promql-rs](https://github.com/detailyang/promql-rs)
+
+#### Status
+* Experiemental, don't use it!
 
 ### Install
 ```bash
@@ -52,3 +55,10 @@ npm install
 npm run build
 npm test
 ```
+
+-------
+
+## TODO
+* [ ] Convert `Expr` to json w/o Debug print
+* [ ] Implement test cases
+* [ ] Document
