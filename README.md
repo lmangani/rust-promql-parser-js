@@ -21,6 +21,30 @@ try {
 } catch(e) { console.log(e) }
 ```
 
+```bash
+node js/index.js 'rate(foo{bar="baz"}[5m])'
+```
+```json
+{
+  "name": "rate",
+  "args": [
+    {
+      "name": "foo",
+      "label_matchers": [
+        {
+          "op": "Equal",
+          "name": "bar",
+          "value": "baz"
+        }
+      ],
+      "offset": false,
+      "range": "Some(300s)"
+    }
+  ],
+  "aggregation": false
+}
+```
+
 ### Build
 Rebuild wasm package release. Not needed for regular module usage.
 ```bash
