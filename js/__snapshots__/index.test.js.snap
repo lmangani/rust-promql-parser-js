@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parse_promql convert promql to json ast 1`] = `
+Object {
+  "@type": "aggregate",
+  "expr": Object {
+    "@type": "call",
+    "args": Array [
+      Object {
+        "@type": "matrix_selector",
+        "range": 300,
+        "vector": Object {
+          "@type": "vector_selector",
+          "at": null,
+          "matchers": Array [
+            Object {
+              "name": "bar",
+              "op": "=",
+              "value": "baz",
+            },
+          ],
+          "name": "foo",
+          "offset": null,
+        },
+      },
+    ],
+    "function": Object {
+      "arg_types": Array [
+        "matrix",
+      ],
+      "name": "rate",
+      "return_type": "vector",
+      "variadic": false,
+    },
+  },
+  "modifier": Object {
+    "include": Array [
+      "x",
+      "y",
+    ],
+  },
+  "op": "sum",
+  "param": null,
+}
+`;
