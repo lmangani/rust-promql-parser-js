@@ -382,6 +382,7 @@ dependencies = [
  "iso8601-timestamp",
  "js-sys",
  "promql-parser",
+ "serde",
  "serde-wasm-bindgen",
  "serde_json",
  "wasm-bindgen",

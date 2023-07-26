@@ -6,6 +6,7 @@ use promql_parser::label::*;
 use std::time::{Duration, SystemTime};
 use serde_json::{json, Value};
 use iso8601_timestamp::Timestamp;
+use serde::ser::Serialize;
 
 trait ToSerde {
     fn to_serde(&self) -> Value;
@@ -267,9 +268,17 @@ impl ToSerde for Expr {
 pub fn promql_parse(query: String) -> Result<JsValue, JsError> {
     match parser::parse(&query) {
         Err(err) => Err(JsError::new(&err)),
-        Ok(expr) => Ok(
-            serde_wasm_bindgen::to_value(&expr.to_serde()).unwrap()
-        ),
+        Ok(expr) =>
+            Ok(
+                expr
+                    .to_serde()
+                    .serialize(
+                        &serde_wasm_bindgen::Serializer::new()
+                            .serialize_missing_as_null(true)
+                            .serialize_maps_as_objects(true)
+                    )
+                    .unwrap()
+            ),
     }
 }
 
