@@ -5,7 +5,37 @@ describe('parse_promql', () => {
 
     const query = 'sum(rate(foo{bar="baz"}[5m])) by (x,y)';
     const result = promql_parse(query);
-    const compare = JSON.parse('{"name":"sum","args":[{"name":"rate","args":[{"name":"foo","label_matchers":[{"op":"Equal","name":"bar","value":"baz"}],"offset":false,"range":"Some(300s)"}],"aggregation":false}],"aggregation":{"action":"By","labels":["x","y"]}}');
-    expect(result).toEqual(compare);
+    expect(result).toEqual({
+      '@type': 'aggregate',
+      op: 'sum',
+      modifier: {
+        include: ['x', 'y'],
+      },
+      param: null,
+      expr: {
+        '@type': 'call',
+        function: {
+          name: 'rate',
+          arg_types: ['matrix'],
+          return_type: 'vector',
+          variadic: false,
+        },
+        args: [
+          {
+            '@type': 'matrix_selector',
+            range: 300,
+            offset: null,
+            vector: {
+              '@type': 'vector_selector',
+              name: 'foo',
+              matchers: [
+                { name: 'bar', op: '=', value: 'baz' },
+              ],
+              at: null,
+            },
+          },
+        ],
+      },
+    });
   });
 });
