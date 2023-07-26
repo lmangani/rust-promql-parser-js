@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: '18'
       - run: docker run --rm -v $PWD:/app i386/rust bash -c "cd /app && ./build.sh"
@@ -17,3 +17,7 @@ jobs:
         with:
           name: pkg
           path: pkg
+      - run: npm publish
+        if: github.event_name != 'pull_request'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
