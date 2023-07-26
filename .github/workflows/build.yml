@@ -1,0 +1,19 @@
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+      - run: docker run --rm -v $PWD:/app i386/rust bash -c "cd /app && ./build.sh"
+      - name: Test
+        run:
+          npm install
+          npm test
+      - uses: actions/upload-artifact@v2
+        with:
+          name: pkg
+          path: pkg
