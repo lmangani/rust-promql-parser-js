@@ -191,9 +191,7 @@ impl ToSerde for Function {
 
 impl ToSerde for FunctionArgs {
     fn to_serde(&self) -> Value {
-        json!({
-            "args": self.args.to_serde(),
-        })
+        self.args.to_serde()
     }
 }
 
@@ -256,7 +254,7 @@ impl ToSerde for Expr {
             Expr::Call(Call { func, args }) =>
                 json!({
                     "@type": "call",
-                    "func": func.to_serde(),
+                    "function": func.to_serde(),
                     "args": args.to_serde(),
                 }),
             Expr::Extension(_) => json!({ "expr": {} }),
