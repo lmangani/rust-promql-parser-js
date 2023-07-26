@@ -5,6 +5,7 @@ use promql_parser::parser::*;
 use promql_parser::label::*;
 use std::time::{Duration, SystemTime};
 use serde_json::{json, Value};
+use iso8601_timestamp::Timestamp;
 
 trait ToSerde {
     fn to_serde(&self) -> Value;
@@ -59,20 +60,20 @@ impl ToSerde for Offset {
     fn to_serde(&self) -> Value {
         match self {
             Offset::Pos(dur) => dur.to_serde(),
-            Offset::Neg(dur) => json!(format!("-{}s", dur.as_secs())),
+            Offset::Neg(dur) => json!(dur.as_secs() as i32 * -1),
         }
     }
 }
 
 impl ToSerde for Duration {
     fn to_serde(&self) -> Value {
-        json!(format!("{}s", self.as_secs()))
+        json!(self.as_secs())
     }
 }
 
 impl ToSerde for SystemTime {
     fn to_serde(&self) -> Value {
-        json!(self.duration_since(SystemTime::UNIX_EPOCH).unwrap().as_secs())
+        json!(Timestamp::from(*self))
     }
 }
 
