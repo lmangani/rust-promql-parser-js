@@ -1,0 +1,12 @@
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: docker run --rm -v $PWD:/app i386/ubuntu bash -c "cd /app && ./build.sh"
+      - uses: actions/upload-artifact@v2
+        with:
+          name: pkg
+          path: pkg
