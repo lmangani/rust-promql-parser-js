@@ -14,12 +14,10 @@ npm install @qxip/promql-parser-js
 
 #### Usage
 ```javascript
-const jsonic = require('jsonic'); // parse imperfect JSON we might return
-const { promql_parse } = require("promql-parser-js"); // parse PromQL to JSON
+const { promql_parse } = require("@qxip/promql-parser-js"); // parse PromQL to JSON
 const query = 'sum(rate(foo{bar="baz"}[5m])) by (x,y)';
 try {
-  const s = promql_parse(query);
-  const parsed = JSON.stringify(jsonic(s));
+  const parsed = promql_parse(query);
   console.log(parsed);
 } catch(e) { console.log(e) }
 ```
