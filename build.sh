@@ -1,5 +1,10 @@
 #!/bin/bash
 
+set -e
+
+apt-get update
+apt-get install -y build-essential curl git
+
 curl -sL https://deb.nodesource.com/setup_18.x | bash -
 apt-get install -y nodejs
 
