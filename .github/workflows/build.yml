@@ -11,14 +11,16 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: docker run --rm -v $PWD:/app i386/rust bash -c "cd /app && ./build.sh"
       - name: Test
-        run:
+        run: |
           npm install
           npm test
       - uses: actions/upload-artifact@v2
         with:
           name: pkg
           path: pkg
-      - run: npm publish --access public
+      - run: |
+          cd pkg
+          npm publish --access public
         if: github.event_name != 'pull_request'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
