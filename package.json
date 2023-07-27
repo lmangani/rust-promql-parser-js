@@ -6,7 +6,9 @@
     "build": "npm run clean && wasm-pack build --target nodejs --release --scope qxip",
     "clean": "rm -rf ./dist ./pkg ./target",
     "test-rust": "cargo test && wasm-pack test --node",
-    "test": "jest"
+    "test": "jest",
+    "update-pkg-version": "sed -i 's/^version = \".*\"/version = \"'$npm_package_version'\"/' Cargo.toml && git add Cargo.toml",
+    "version": "npm run update-pkg-version"
   },
   "devDependencies": {
     "jest": "^27.5.1",
