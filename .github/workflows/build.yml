@@ -18,9 +18,10 @@ jobs:
         with:
           name: pkg
           path: pkg
-      - run: |
+      - name: Publish
+        run: |
           cd pkg
           npm publish --access public
-        if: github.event_name != 'pull_request'
+        if: startsWith(github.ref, 'refs/tags/v')
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
