@@ -82,7 +82,7 @@ impl ToSerde for AtModifier {
     fn to_serde(&self) -> Value {
         match self {
             AtModifier::Start => json!("start"),
-            AtModifier::End => json!("at": "end"),
+            AtModifier::End => json!("end"),
             AtModifier::At(offset) => json!(offset.to_serde()),
         }
     }
