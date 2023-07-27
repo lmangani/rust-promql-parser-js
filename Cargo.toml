@@ -2,7 +2,7 @@
 [package]
 name = "promql-parser-js"
 description = "promql parser binding for node"
-version = "0.2.1"
+version = "0.2.2"
 authors = ["Lorenzo Mangani <lorenzo.mangani@gmail.com>"]
 categories = ["wasm"]
 readme = "README.md"
