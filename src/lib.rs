@@ -81,9 +81,9 @@ impl ToSerde for SystemTime {
 impl ToSerde for AtModifier {
     fn to_serde(&self) -> Value {
         match self {
-            AtModifier::Start => json!({ "at": "start" }),
-            AtModifier::End => json!({ "at": "end" }),
-            AtModifier::At(offset) => json!({ "at": offset.to_serde() }),
+            AtModifier::Start => json!("start"),
+            AtModifier::End => json!("at": "end"),
+            AtModifier::At(offset) => json!(offset.to_serde()),
         }
     }
 }
