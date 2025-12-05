@@ -65,7 +65,9 @@ pub fn expr_to_json(expr: &Expr) -> Value {
         }),
         Expr::While(e) => while_to_json(e),
         Expr::Yield(e) => yield_to_json(e),
-        // Handle unknown variants that may be added in future syn versions
+        // syn::Expr is #[non_exhaustive], so we must handle unknown variants.
+        // This uses ToTokens to produce a stable representation for any future variants.
+        #[allow(unreachable_patterns)]
         _ => json!({
             "kind": "Unknown",
             "tokens": expr.to_token_stream().to_string()
@@ -136,6 +138,8 @@ pub fn lit_to_json(lit: &Lit) -> Value {
             "kind": "Verbatim",
             "tokens": v.to_string()
         }),
+        // syn::Lit is #[non_exhaustive], handle future variants
+        #[allow(unreachable_patterns)]
         _ => json!({
             "kind": "Unknown",
             "tokens": lit.to_token_stream().to_string()
@@ -201,7 +205,9 @@ fn binop_to_json(op: &BinOp) -> Value {
         BinOp::BitOrAssign(_) => "|=",
         BinOp::ShlAssign(_) => "<<=",
         BinOp::ShrAssign(_) => ">>=",
-        _ => "unknown",
+        // syn::BinOp is #[non_exhaustive], handle future variants
+        #[allow(unreachable_patterns)]
+        _ => return json!(op.to_token_stream().to_string()),
     };
     json!(op_str)
 }
@@ -212,7 +218,9 @@ fn unop_to_json(op: &UnOp) -> Value {
         UnOp::Deref(_) => "*",
         UnOp::Not(_) => "!",
         UnOp::Neg(_) => "-",
-        _ => "unknown",
+        // syn::UnOp is #[non_exhaustive], handle future variants
+        #[allow(unreachable_patterns)]
+        _ => return json!(op.to_token_stream().to_string()),
     };
     json!(op_str)
 }
