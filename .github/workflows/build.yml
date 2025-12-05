@@ -1,27 +1,38 @@
-on: push
+on:
+  push:
+  pull_request:
+  release:
+    types: [published]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+
       - uses: actions/setup-node@v6
         with:
           node-version: '18'
           registry-url: 'https://registry.npmjs.org'
-      - run: docker run --rm -v $PWD:/app i386/rust bash -c "cd /app && ./build.sh"
+
+      - name: Build (in Docker)
+        run: docker run --rm -v $PWD:/app i386/rust bash -c "cd /app && ./build.sh"
+
       - name: Test
         run: |
           npm install
           npm test
-      - uses: actions/upload-artifact@v5
+
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v5
         with:
           name: pkg
           path: pkg
+
       - name: Publish
+        if: github.event_name == 'release' && github.event.action == 'published'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           cd pkg
           npm publish --access public
-        if: startsWith(github.ref, 'refs/tags/v')
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
