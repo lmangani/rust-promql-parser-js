@@ -3,6 +3,8 @@ use wasm_bindgen::prelude::*;
 use promql_parser::parser;
 use promql_parser::parser::*;
 use promql_parser::label::*;
+use promql_parser::parser::token::TokenType;
+use promql_parser::parser::value::ValueType;
 use std::time::{Duration, SystemTime};
 use serde_json::{json, Value};
 use iso8601_timestamp::Timestamp;
