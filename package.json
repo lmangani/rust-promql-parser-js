@@ -1,6 +1,6 @@
 {
   "name": "@qxip/promql-parser-js",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "author": "Lorenzo Mangani <lorenzo.mangani@gmail.com>",
   "scripts": {
     "build": "npm run clean && wasm-pack build --target nodejs --release --scope qxip",
