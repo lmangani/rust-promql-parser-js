@@ -10,6 +10,12 @@ use serde_json::{json, Value};
 use iso8601_timestamp::Timestamp;
 use serde::ser::Serialize;
 
+// Module for syn::Expr JSON serialization
+pub mod syn_expr_json;
+
+// Re-export the main expr_to_json function and helpers
+pub use syn_expr_json::{expr_to_json, lit_to_json, path_to_string, pat_to_string, type_to_string};
+
 trait ToSerde {
     fn to_serde(&self) -> Value;
 }
